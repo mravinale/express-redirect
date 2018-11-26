@@ -3,7 +3,7 @@
 /**
  * Module dependencies.
  */
-var app = require("./redirect/app");
+var app = require("./redirect/redirect");
 var debug = require("debug")("untitled:server");
 var http = require("http");
 

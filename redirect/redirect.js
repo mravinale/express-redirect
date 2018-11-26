@@ -1,18 +1,18 @@
 var express = require("express");
-var bodyParser = require("body-parser");
 var logger = require("morgan");
+var cors = require("cors");
 var Client = require("node-rest-client").Client;
 
 var app = express();
 var client = new Client();
 
-app.use(bodyParser.json());
+app.use(cors());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-const targetBaseUrl = "http://apidev.lupuscorner.com";
-//const targetBaseUrl = 'http://localhost:3030';
+//const targetBaseUrl = "http://apidev.lupuscorner.com";
+const targetBaseUrl = "http://localhost:8080";
 
 const redirectHandler = (req, res) => {
   let args = {
@@ -24,13 +24,13 @@ const redirectHandler = (req, res) => {
   };
 
   client.registerMethod(
-    "jsonMethod",
+    "redirect",
     targetBaseUrl + req.originalUrl,
     req.method
   );
 
-  client.methods.jsonMethod(args, (data, response) => {
-    let status = response.status || "200";
+  client.methods.redirect(args, (data, response) => {
+    let status = response.status || response.statusCode || "500";
     res.status(status).send(data);
   });
 };
