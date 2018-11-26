@@ -1,0 +1,17 @@
+{
+ "AWSEBDockerrunVersion": "1",
+ "Authentication": {
+   "Bucket": "elasticbeanstalk-us-east-1-627851191278",
+   "Key": "config.json"
+ },
+ "Logging": "/var/log/nodejs",
+ "Image": {
+   "Name": "mravinale/redirector:prod",
+   "Update": "true"
+ },
+ "Ports": [
+   {
+     "ContainerPort": "3000"
+   }
+ ]
+}

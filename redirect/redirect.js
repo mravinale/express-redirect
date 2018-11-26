@@ -2,6 +2,7 @@ var express = require("express");
 var logger = require("morgan");
 var cors = require("cors");
 var Client = require("node-rest-client").Client;
+var dotconfig = require("dotenv").config();
 
 var app = express();
 var client = new Client();
@@ -11,8 +12,7 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-//const targetBaseUrl = "http://apidev.lupuscorner.com";
-const targetBaseUrl = "http://localhost:8080";
+const targetBaseUrl = process.env.SERVER_REDIRECT;
 
 const redirectHandler = (req, res) => {
   let args = {
